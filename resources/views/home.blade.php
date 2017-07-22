@@ -15,3 +15,10 @@
     </div>
 </div>
 @endsection
+
+
+@section('content_1')
+<div class="container">
+    <h1>HELLO</h1>
+</div>
+@endsection

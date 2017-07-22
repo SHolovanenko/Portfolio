@@ -1,0 +1,166 @@
+body{
+    margin: 0px;
+    background: url('/img/bg_photo_me.png') no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+    min-width: 1224px;
+    background-attachment: fixed;
+    
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 26pt;
+	font-style: normal;
+	font-variant: normal;
+        color: #fff;
+}
+
+.menu a { 
+    color: #8B0000;
+}
+.menu a:hover{
+    transition: 0.3s;
+    color: #fff;
+}
+.menu a:not(hover){
+    transition: 0.3s;
+    color: #8B0000;
+}
+a:link { 
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+} 
+a:visited { text-decoration: none; } 
+a:active { text-decoration: none; }
+
+
+.menu {
+    width: 100%;
+    color: #8B0000;
+    position: absolute;
+    top: 0;
+}
+.menu ul{
+    margin: 0; /* Обнуляем значение отступов */
+    position: absolute;
+    text-align: right;
+    right: 3%;
+}
+.menu ul li{
+    display: inline; /* Отображать как строчный элемент */
+    padding-left: 10px; /* Значение полей */
+    padding-right: 10px;
+}
+
+#home {
+    position: relative;
+    top: 0px;
+    height: 100%;
+}
+
+#present{
+    position: relative;
+    display: inline-block;
+    left: 45%;
+    top: 30%;
+}
+#name{
+    font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", "sans serif";
+	font-size: 64pt;
+	font-style: normal;
+	font-variant: normal;
+        /*font-weight: 500;*/
+	line-height: 60pt;
+    color: #8B0000;
+}
+#present .subtitle{
+    font-size: 56px;
+    line-height: 35pt;
+}
+
+.titlePosition{
+    text-align: center;
+    margin: auto;
+}
+.title{
+    font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", "sans serif";
+	font-size: 64pt;
+	font-style: normal;
+	font-variant: normal;
+        /*font-weight: 500;*/
+	line-height: 60pt;
+    padding: 20pt;
+}
+.subtitle{
+    margin-bottom: 6%;
+}
+
+#skills{
+    height: 100%;
+    background-color: rgba(102, 102, 102, 0.75);
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+#skills .titlePosition{
+    margin-left: 30%;
+}
+#skillContent{
+    position: relative;
+    width: 100%;
+    font-size: 16pt;
+}
+#listOfSkills{
+    
+}
+.skillLine{
+    margin-bottom: 1.5%;
+}
+.skillName{
+    display: inline-block;
+    text-align: right;
+    width: 45%;
+}
+.scale{
+    display: inline-block;
+    position: relative;
+    width: 45%;
+}
+.scale div {
+    display: inline-block;
+}
+.scale .scaleLine{
+    background-color: #8B0000;
+    vertical-align: middle;
+    font-size: 10pt;
+}
+.scale .scaleValue{
+    background: none;
+}
+.scale_php{ width: 85%; transition: 3.3s; }
+.scale_javascript{ width: 80%; transition: 3s; }
+.scale_sql{ width: 70%; transition: 3.8s; }
+.scale_htlmcss{ width: 80%; transition: 2.5s; }
+.scale_laravel{ width: 12%; transition: 4.7s; }
+.scale_wordpress{ width: 60%; transition: 5.5s; }
+.scale_drupal{ width: 75%; transition: 4s; }
+.scale_joomla{ width: 80%; transition: 5.5s; }
+
+.cutedSize{
+    width: 0%;
+}
+
+#spacer{
+    height: 50%;
+}
+
+#resume{
+    margin: auto;
+    width: 760px;
+    height: 760px;
+    background-color: #666;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 1);
+}
+
+#history{
+    background: url('/img/mountain.png') no-repeat;
+    width: 100%;
+    height: 3676px;
+}

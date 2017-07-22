@@ -11,20 +11,17 @@
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
-
-/*
-Route::get('/', function(){
-    
-    return view('myFirstPage.index');
-});
  */
 
-Route::get('myfirstpage', 'MyFirstPageController@index');
+/*
+ * Ссылаемся на портфолио как на основную страницу нашего сайта
+ */
+Route::get('/', 'PortfolioController@index');
 
-//Route::get('myfirstpage', ['as' => 'page', 'uses' => 'MyFirstPageController@index']);﻿
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
