@@ -1,9 +1,3 @@
-﻿<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -70,19 +64,7 @@ and open the template in the editor.
         })*/
         </script>
     </head>
-    <body>
-        
-        <div class="menu">
-            <ul>
-                <a href="#"><li>Главная</li></a>
-                <a href="#"><li>Навыки</li></a>
-                <a href="#"><li>Опыт</li></a>
-                <a href="#"><li>Портфолио</li></a>
-                <a href="#"><li>Контакты</li></a>
-            </ul>
-        </div>
-        
+    <body>        
         @yield('content')
-        
     </body>
 </html>
