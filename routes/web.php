@@ -21,6 +21,8 @@ Route::get('/', function () {
  * Ссылаемся на портфолио как на основную страницу нашего сайта
  */
 Route::get('/', 'PortfolioController@index');
+Route::get('/administrator', 'PortfolioAdminController@index');
+Route::post('/administrator', 'PortfolioAdminController@update');
 
 Auth::routes();
 

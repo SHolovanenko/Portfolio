@@ -1,6 +1,6 @@
 body{
     margin: 0px;
-    background: url('/img/bg_photo_me.png') no-repeat;
+    background: url('/img/bg_photo_me.png') #808080 no-repeat;
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
@@ -20,14 +20,14 @@ body{
     visibility: hidden;
 }
 
-.menu a { 
+a { 
     color: #8B0000;
 }
-.menu a:hover{
+a:hover{
     transition: 0.3s;
     color: #fff;
 }
-.menu a:not(hover){
+a:not(hover){
     transition: 0.3s;
     color: #8B0000;
 }
@@ -168,11 +168,12 @@ a:active { text-decoration: none; }
     width: 0%;
 }
 
-#resume{
+#resumeLayer{
     top: -100%;
+}
+#resume{
     margin: auto;
     width: 85vh;
-    height: 85vh;
     background-color: #808080;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     text-align: center;
@@ -197,6 +198,7 @@ a:active { text-decoration: none; }
 }
 #downloadResume{
     margin-top: 8%;
+    margin-bottom: 8%;
     font-size: 18pt;
 }
 #resume #downloadResume a { 
@@ -321,6 +323,127 @@ a:active { text-decoration: none; }
     border: none;
 }
 
+#portfolioLayer{
+    top: 620%;
+}
+#portfolioLayer #portfolio{
+    box-shadow: 0px -200px 320px 00px #808080;
+    background-color: #808080;
+    text-align: center;
+    height: 100%;
+    top: -100%;
+}
+#portfolioLayer #portfolio #portfolioContent div{
+    width: 200pt;
+    height: 200pt;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 10pt;
+    border: 3px solid #8B0000;
+    background-color: transparent; 
+}
+#portfolioLayer #portfolio #portfolioContent div p{
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+}
+#portfolioLayer #portfolio #portfolioContent div:hover{
+    background-color: #8B0000;
+    transition: 0.3s;
+}
+
+.showMoreLink:after{
+    content: ' >';
+}
+
+#contactLayer{    
+    top:550%;
+}
+#contact{
+    top: -130%;
+    margin: auto;
+    width: 100vh;
+    height: 85%;
+    background-color: #808080;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+#contact .subtitle{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+#contact #contactContent {
+    font-size: 14pt;
+}
+#contact #contactContent div{
+    width: 40%;
+    position: relative;
+    float: left;
+} 
+#contact #contactContent #headnote{
+    padding-left: 7%;
+    padding-right: 2%;
+}
+#contact #contactContent #form{
+    padding-right: 7%;
+    padding-left: 2%;
+}
+#contact #contactContent #form form input,textarea{
+    width: 100%;
+    margin-bottom: 2%;
+    resize: none;
+}
+#contact #contactContent #form form input{
+    height: 30pt;
+}
+#contact #contactContent #form form textarea{
+    
+}
+#form input[type="submit"] { 
+    color: #8B0000;
+    background-color: transparent;
+    font-size: 16pt;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+    border: 3px solid #8B0000;
+}
+#form input[type="submit"]:hover{
+    transition: 0.3s;
+    color: #fff;
+    background-color: #8B0000;
+}
+#form input[type="submit"]:not(hover){
+    transition: 0.3s;
+    color: #8B0000;
+}
+
+#bg_contact_me{
+    background: url('/img/bg_contact_me.png') no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+}
+
+#footerLayer{
+    background: #808080;
+    height: 50%;
+    top: 70%
+}
+#footer div{
+    display: inline-block;
+    font-size: 10pt;
+    width: 24%;
+    margin: 4%;
+}
+
+.important{
+    color: #8B0000;
+}
+
 
 
 .parallax {
@@ -351,7 +474,7 @@ a:active { text-decoration: none; }
 }
 .parallax__layer--back {
     /*transform: translateZ(-1px) scale(2);*/
-    transform: translateZ(-300px) scale(2);
+    transform: translateZ(-295px) scale(2);
     z-index: 2;
 }
 .parallax__layer--deep {

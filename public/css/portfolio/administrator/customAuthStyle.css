@@ -1,0 +1,223 @@
+/* 
+    Created on : Aug 4, 2017, 4:22:36 PM
+    Author     : sergi
+*/
+
+body{
+    
+    background: url('/img/mountain.png') fixed;
+    background-size: 100%; /* Современные браузеры */
+    color: #000; /*#8B0000;*/
+    margin: 0px;
+    padding: 0px;
+}
+
+#auth_block {
+    
+    background: #ccc;
+    position: relative;
+    top:30%;
+    margin: auto;
+    width: 15%;
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+#auth_block form{
+
+    padding: 5%;
+}
+
+#auth_block form input{
+
+    color: #8B0000;
+    width: 100%;
+    font-size: 14pt;
+    text-align: center;
+}
+
+#auth_block form input[type="submit"] { 
+    
+    font-weight: bold;
+    background-color: transparent;
+    padding-left: 4%;
+    padding-right: 4%;
+    margin-top: 3px;
+    border: 3px solid #8B0000;
+}
+#auth_block form input[type="submit"]:hover{
+    
+    transition: 0.3s;
+    color: #fff;
+    background-color: #8B0000;
+}
+#auth_block form input[type="submit"]:not(hover){
+    
+    transition: 0.3s;
+    color: #8B0000;
+}
+
+.button{
+    
+    color: #8B0000;
+    margin: auto;
+    padding-left: 2%;
+    padding-right: 2%;
+    border: 2px solid #8B0000;
+    background-color: transparent;
+}
+.button:hover{
+    
+    transition: 0.3s;
+    color: #fff;
+    background-color: #8B0000;
+}
+.button:not(hover){
+    
+    transition: 0.3s;
+}
+.button:link { 
+    
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+} 
+.button:visited { 
+    
+    text-decoration: none; 
+} 
+.button:active { 
+    
+    text-decoration: none; 
+}
+
+.formGroup{
+    
+    position: relative;
+    display: inline-block;
+    margin: auto;
+    margin-top: 10px;
+    width: 80%;
+}
+
+.formGroup input{
+    
+    width: 32%;
+}
+
+.inputLabel{
+    
+    display: inline-block;
+    position: relative;
+    width: 6%;
+}
+
+.rowGroup {
+    
+    display: inline-block;
+    width: 90%;
+    margin-top: 10px;
+}
+
+.rowGroup .languageGroup{
+    
+    display: inline-block;
+    position: relative;
+    width:48%;
+}
+
+.languageGroup input,textarea{
+    
+    display: block;
+    width: 100%;
+}
+
+#form {
+    
+    background: rgba(102, 102, 102, 0.75);
+    width: 70%;
+    margin: auto;
+    color: #fff;
+}
+
+h1{
+    
+    font-family: Consolas, monaco, monospace;
+	font-size: 32pt;
+	font-style: normal;
+	font-variant: normal;
+        text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+}
+
+.areaToPast div a {
+    
+    display: inline-block;
+}
+
+.remove{
+    
+    margin: 0;
+    padding: 0;
+    height: 18px;
+    width: 18px;
+    text-align: center;
+}
+
+.formButtons{
+    
+    margin-top: 5px;
+}
+
+.formSection{
+    
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#saveLine {
+    
+    padding-bottom: 5%;
+    padding-top: 5%;
+}
+
+#saveLine input{
+    
+    width: 30%;
+    margin-left: 36%;
+}
+
+input[type="text"] {
+    
+    background: rgba(102, 102, 102, 0.25);;
+    border: 2px solid #8B0000;
+    color: #fff;
+    margin-top:3px;
+    font-size: 14pt;
+    padding: 1%;
+}
+input[type="text"]::placeholder {
+    
+    color: #ccc;
+}
+
+textarea{
+    
+    background: rgba(102, 102, 102, 0.25);;
+    border: 2px solid #8B0000;
+    color: #fff;
+    margin-top:3px;
+}
+
+#saveLine input[type="submit"]{
+    
+    background: #8B0000;
+    color: #fff;
+    border: 0;
+    font-size: 14pt;
+}
+#saveLine input[type="submit"]:hover{
+    
+    background: #7B0000;
+    color: #fff;
+    border: 0;
+}
