@@ -10,23 +10,34 @@
             <div id="menu" class="menu">
             
                 <ul>
-                    <li><a href="#menu">Главная</a></li>
-                    <li><a href="#skills">Навыки</a></li>
-                    <li><a href="#history">Опыт</a></li>
-                    <li><a href="#portfolio">Портфолио</a></li>
-                    <li><a href="#contact">Контакты</a></li>
+                    <li><a href="#menu">    {{ $commonInfos[0]['value'] }}</a></li>
+                    <li><a href="#skills">  {{ $commonInfos[1]['value'] }}</a></li>
+                    <li><a href="#firstDot">{{ $commonInfos[2]['value'] }}</a></li>
+                    <li><a href="#portfolio">{{ $commonInfos[3]['value'] }}</a></li>
+                    <li><a href="#contact"> {{ $commonInfos[4]['value'] }}</a></li>
                 </ul>
+                <?php 
+                    $current_url = URL::current();
+                    $lang = explode('/', $current_url);
+                    if (strcasecmp($lang[3], 'ru') == 0 ){
+                        echo "<a href='/en'><div id='language-panel'>EN</div></a>";
+                    }
+                    else {
+                        echo "<a href='/ru'><div id='language-panel'>RU</div></a>";
+                    }
+                ?>
             </div>
             
             <div id="present">
 
                 <div id="name">
-                    СЕРГЕЙ<br>            
-                    ГОЛОВАНЕНКО
+                    {{ $mainInfo['firstName'] }}
+                    <br>            
+                    {{ $mainInfo['lastName'] }}
                 </div>
 
                 <div class="subtitle">
-                    Веб-разработчик
+                    {{ $mainInfo['profession'] }}
                 </div>
             </div>
         </div>
@@ -42,124 +53,27 @@
 
             <div class="titlePosition">
 
-                <div class="title">НАВЫКИ</div>
+                <div class="title">{{ $commonInfos[1]['value'] }}</div>
 
-                <div class="subtitle">УРОВЕНЬ ВЛАДЕНИЯ ТЕХНОЛОГИЯМИ</div>
+                <div class="subtitle">{{ $commonInfos[12]['value'] }}</div>
             </div>
 
             <div id="skillContent">
 
                 <div id="listOfSkills">
-
+                    @foreach($skills as $skill)
                     <div class="skillLine">
 
-                        <div class="skillName">PHP</div>
+                        <div class="skillName">{{ $skill['title'] }}</div>
 
                         <div class="scale">
 
-                            <div class="scaleLine cutedSize scale_php" id="scale_php">&nbsp;</div>
+                            <div class="scaleLine cutedSize" style="width: {{ $skill['value'] }}%;">&nbsp;</div>
 
-                            <div class="scaleValue" id="scaleValue_php"><span class="number">85</span>%</div>
+                            <div class="scaleValue"><span class="number">{{ $skill['value'] }}</span>%</div>
                         </div>
                     </div>
-
-
-
-                    <div class="skillLine">
-
-                        <div class="skillName">JAVASCRIPT</div>
-
-                        <div class="scale">
-
-                            <div class="scaleLine cutedSize scale_javascript" id="scale_javascript">&nbsp;</div>
-
-                            <div class="scaleValue" id="scaleValue_javascript"><span class="number">80</span>%</div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="skillLine">  
-
-                        <div class="skillName">SQL</div>
-
-                        <div class="scale">
-
-                            <div class="scaleLine cutedSize scale_sql" id="scale_sql">&nbsp;</div>
-
-                            <div class="scaleValue" id="scaleValue_sql"><span class="number">70</span>%</div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="skillLine"> 
-
-                        <div class="skillName">HTML&CSS</div>
-
-                        <div class="scale">
-
-                            <div class="scaleLine cutedSize scale_htlmcss" id="scale_htlmcss">&nbsp;</div>
-
-                            <div class="scaleValue" id="scaleValue_htlmcss"><span class="number">80</span>%</div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="skillLine">   
-
-                        <div class="skillName">LARAVEL</div>
-
-                        <div class="scale">
-
-                            <div class="scaleLine cutedSize scale_laravel" id="scale_laravel">&nbsp;</div>
-
-                            <div class="scaleValue" id="scaleValue_laravel"><span class="number">12</span>%</div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="skillLine">    
-
-                        <div class="skillName">WORDPRESS</div>
-
-                        <div class="scale">
-
-                            <div class="scaleLine cutedSize scale_wordpress" id="scale_wordpress">&nbsp;</div>
-
-                            <div class="scaleValue" id="scaleValue_wordpress"><span class="number">60</span>%</div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="skillLine">
-
-                        <div class="skillName">DRUPAL</div>
-
-                        <div class="scale">
-
-                            <div class="scaleLine cutedSize scale_drupal" id="scale_drupal">&nbsp;</div>
-
-                            <div class="scaleValue" id="scaleValue_drupal"><span class="number">75</span>%</div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="skillLine"> 
-
-                        <div class="skillName">JOOMLA</div>
-
-                        <div class="scale">
-
-                            <div class="scaleLine cutedSize scale_joomla" id="scale_joomla">&nbsp;</div>
-
-                            <div class="scaleValue" id="scaleValue_joomla"><span class="number">80</span>%</div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>    
             </div>
         </div>
@@ -182,36 +96,16 @@
             
             <div id="resume">
                 
-                <div class="title">Языки: </div>
-
+                @foreach($resumes as $resume)
+                <div class="title">{{ $resume['title'] }}:</div>
+                
                 <div class="content">
-                    PHP, SQL, Python, Javascript, HTML, CSS, Java, C++, C#;
-                    <br>
-                    (English, Francais, Українська, Русский)
+                    {{ $resume['text'] }}
                 </div>
-
-
-
-                <div class="title">Технологии: </div>
-
-                <div class="content">
-                    OOP, MVC pattern, Laravel, JQuery, Bootstrap, Ajax, 
-                    JSON, MySQL, Git, Composer, TortoiseSVN,  
-                    Modules creating for the CMSs;
-                </div>
-
-
-
-                <div class="title">CMSs: </div>
-
-                <div class="content">
-                    Joomla, Wordpress, Drupal;
-                </div>
-
-
-
+                @endforeach     
+                
                 <div id="downloadResume">
-                    <a href="#">Скачать резюме</a>
+                    <a href="#">{{ $commonInfos[5]['value'] }}</a>
                 </div>
                 
                 <div>&nbsp;</div>
@@ -222,138 +116,50 @@
         
         <div id="historyContent" class="parallax__layer parallax__layer--back">
             
-            <div class="storyLine storyLineFirst">
-                
-                <div class="storyLeft empty"></div>
-                
-                <div id="firstDot" class="storyDot"></div>
-                
-                <div class="storyRight connectorLineForRight connectorLineHidden connectorLine">
+            @for ($i = 0; $i < count($stories); $i++)
+                <div class="storyLine <?php if (($i+1) == count($stories)) echo 'storyLineLast';?>">
+                @if ( ($i+1)%2 == 0 )
+                    <div class="storyLeft empty"></div>
                     
-                    <div class="hidden storyContent">
-                        
-                        <div class="storyDate">
-                            2016 - 2017
-                        </div>
+                    <div <?php if ($i == 3) echo 'id="firstDot"';?> class="storyDot"></div>
+                @endif
 
-                        <div class="storyPlace">
-                            Erasus+ во Франции
-                        </div>
+                    <div class="<?php echo (($i+1)%2 == 0) ? 'storyRight connectorLineForRight' : 'storyLeft connectorLineForLeft';?> connectorLineHidden connectorLine">
 
-                        <div class="storyPerson">
-                            Студент
-                        </div>
+                        <div class="hidden storyContent">
 
-                        <div class="storyExplain">
-                            Участвовал в годовой программе Erasmus+ 
-                            и учился в лионском университете Lyon Lumiere 2 
-                            на специальности информатика и статистика.
+                            <div class="storyDate">
+                                {{ $stories[$i]['year'] }}
+                            </div>
+
+                            <div class="storyPlace">
+                                {{ $stories[$i]['title'] }}
+                            </div>
+
+                            <div class="storyPerson">
+                                {{ $stories[$i]['position'] }}
+                            </div>
+
+                            <div class="storyExplain">
+                                {{ $stories[$i]['text'] }}
+                            </div>
                         </div>
                     </div>
+                
+                @if ( ($i+1)%2 != 0 )
+                    <div <?php if ($i == 3) echo 'id="firstDot"';?> class="storyDot"></div>
+
+                    <div class="storyRight empty"></div>
+                @endif
                 </div>
-            </div>
-            
-            <div class="storyLine">
-                
-                <div class="storyLeft connectorLineForLeft connectorLineHidden connectorLine">
-                    
-                    <div class="hidden storyContent">
-                        
-                        <div class="storyDate">
-                            2015 - 2016
-                        </div>
-
-                        <div class="storyPlace">
-                            ЦБВМ СумГУ
-                        </div>
-
-                        <div class="storyPerson">
-                            Back-end программист
-                        </div>
-
-                        <div class="storyExplain">
-                            Отдел веб-разработки при университете. 
-                            В течении года работал в команде с опытными 
-                            программистами над университетскими проэктами,
-                            а так же проэктами от зарубежных заказчиков.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="storyDot"></div>
-                
-                <div class="storyRight empty"></div>
-            </div>
-            
-            <div class="storyLine">
-                
-                <div class="storyLeft empty"></div>
-                
-                <div class="storyDot"></div>
-                
-                <div class="storyRight connectorLineForRight connectorLineHidden connectorLine">
-                    
-                    <div class="hidden storyContent">
-                        
-                        <div class="storyDate">
-                            2014 - 2016
-                        </div>
-
-                        <div class="storyPlace">
-                            Диплом бакалавра СумГУ
-                        </div>
-
-                        <div class="storyPerson">
-                            Студент
-                        </div>
-
-                        <div class="storyExplain">
-                            В течении двух лет учился в Сумском Государственном
-                            университете на кафедре компьютерных 
-                            наук, специальноси информатика. Где проводил
-                            защиту диплома по теме «Веб-сервис для 
-                            централизованного администрирования опросов».
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="storyLine storyLineLast">
-                
-                <div class="storyLeft connectorLineForLeft connectorLineHidden connectorLine">
-                    
-                    <div class="hidden storyContent">
-                        <div class="storyDate">
-                            2012 - 2014
-                        </div>
-
-                        <div class="storyPlace">
-                            ВНУ им. В.Даля
-                        </div>
-
-                        <div class="storyPerson">
-                            Студент
-                        </div>
-
-                        <div class="storyExplain">
-                            Поступил в Восточноукраинский национальный 
-                            университет имени В.Даля на кафедру компьютерных наук,
-                            специальности информатика.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="storyDot"></div>
-                
-                <div class="storyRight empty"></div>
-            </div>
+            @endfor
         </div>
 
         <div id="bgMountain" class="parallax__layer parallax__layer--deep">
             
             <div class="cover">
                 
-                <div class="title hidden">ОПЫТ И ОБРАЗОВАНИЕ</div>
+                <div class="title hidden">{{ $commonInfos[2]['value'] }}</div>
             </div>
         </div>
     </div>
@@ -364,23 +170,24 @@
         
         <div id="portfolio" class="parallax__layer parallax__layer--base">
             
-            <div class="title">Портфолио</div>
+            <div class="title">{{ $commonInfos[3]['value'] }}</div>
             
-            <div class="subtitle">Свежие работы. <a class="showMoreLink" href="#">Показать еще</a></div>
+            <div class="subtitle">{{ $commonInfos[8]['value'] }} <a class="showMoreLink" href="#">{{ $commonInfos[9]['value'] }}</a></div>
             
             <div id="portfolioContent">
-                
+                @foreach ($portfolio as $project)
                 <div>
-                    <p>Ой, кто-то украл отсюда проэкт.<p>
+                    <p>
+                        {{ $project['link'] }}
+                        <br>
+                        {{ $project['img'] }}
+                        <br>
+                        {{ $project['title'] }}
+                        <br>
+                        {{ $project['text'] }}
+                    </p>
                 </div>
-                
-                <div>
-                    <p>Ой, кто-то украл отсюда проэкт.<p>
-                </div>
-                
-                <div>
-                    <p>Ой, кто-то украл отсюда проэкт.<p>
-                </div>
+                @endforeach
             </div>
         </div>
         
@@ -393,34 +200,33 @@
         
         <div id="contact" class="parallax__layer parallax__layer--fore">
             
-            <div class="subtitle">Свяжитесь со мной</div>
+            <div class="subtitle">{{ $commonInfos[10]['value'] }}</div>
             
             <div id="contactContent">
                 
                 <div id="headnote">
-                    Если Вас заинтересовала
-                    моя кандидатура, у Вас
-                    есть какие-либо
-                    предложения или 
-                    пожелания, Вы можете 
-                    связаться со мной через
-                    эту форму, либо по
-                    моим контактным данным:
+                    {{ $commonInfos[11]['value'] }}
                     <br><br>
-                    <a href="mailto:serhii.holovanenko@gmail.com">serhii.holovanenko@gmail.com</a>
-                    <br>
-                    <span class="important">+38 050 848 9086</span>
+                    @foreach ($mails as $mail)
+                        <a href="mailto:{{ $mail['mail'] }}">{{ $mail['mail'] }}</a>
+                        <br>
+                    @endforeach
+                    
+                    @foreach ($phones as $phone)
+                        <span class="important">{{ $phone['phone'] }}</span>
+                        <br>
+                    @endforeach
                 </div>
                 
                 <div id="form">
                     
                     <form>
                         
-                        <input type="text" placeholder="Имя">
+                        <input type="text" placeholder="{{ $commonInfos[13]['value'] }}">
                         <input type="email" placeholder="Email">
-                        <input type="text" placeholder="Тема">
+                        <input type="text" placeholder="{{ $commonInfos[14]['value'] }}">
                         <textarea rows="10"></textarea>
-                        <input type="submit" value="ОТПРАВИТЬ">
+                        <input type="submit" value="{{ $commonInfos[15]['value'] }}">
                     </form>
                 </div>
             </div>
@@ -439,9 +245,15 @@
                 <div></div>
                 
                 <div>
-                    serhii.holovanenko@gmail.com
-                    <br>
-                    +38 050 848 9086
+                    @foreach ($mails as $mail)
+                        {{ $mail['mail'] }}
+                        <br>
+                    @endforeach
+                    
+                    @foreach ($phones as $phone)
+                        {{ $phone['phone'] }}
+                        <br>
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -2,6 +2,8 @@
     
     $( document ).ready( function () {
         
+        $('#listOfSkills .skillLine .scaleLine').animate({width: 'toggle'});
+                            
         var showSkillValueCounting = true;
         
         var windowHeight = $( window ).height();
@@ -24,11 +26,20 @@
                             
                             showAnimationSkills = false;
 
-                            $('#listOfSkills .skillLine .scale .cutedSize').removeClass('cutedSize');
+                            $('#listOfSkills .skillLine .scaleLine').animate({
+                                    width: 'toggle'
+                                }, {
+                                    duration: 2500, 
+                                    specialEasing: {
+                                        width: 'swing'
+                                    }
+                                }
+                            );
+                            //$('#listOfSkills .skillLine .scale .cutedSize').removeClass('cutedSize');
 
                             $('.number').spincrement({
 
-                                duration: 4500
+                                duration: 4000
                             });
                     }
                 }); 

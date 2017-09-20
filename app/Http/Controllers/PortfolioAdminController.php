@@ -345,23 +345,6 @@ class PortfolioAdminController extends Controller
         }
     }
     
-    public function update_main_info( $input ){
-        //
-        $mainInfoEn = MainInfo::where('language', 'en')->first();
-        $mainInfoRu = MainInfo::where('language', 'ru')->first();
-        
-        $mainInfoEn->firstName = $input['firstNameEn'];
-        $mainInfoEn->lastName = $input['lastNameEn'];
-        $mainInfoEn->profession = $input['professionEn'];
-        
-        $mainInfoRu->firstName = $input['firstNameRu'];
-        $mainInfoRu->lastName = $input['lastNameEn'];
-        $mainInfoRu->profession = $input['professionRu'];
-        
-        $mainInfoEn->save();
-        $mainInfoRu->save();
-    }
-    
     public function update_skill( $input ){
         //
         if (isset($input['skillTrashList']) && $input['skillTrashList'] != ''){
@@ -401,5 +384,22 @@ class PortfolioAdminController extends Controller
                 }
             }
         }
+    }
+    
+    public function update_main_info( $input ){
+        //
+        $mainInfoEn = MainInfo::where('language', 'en')->first();
+        $mainInfoRu = MainInfo::where('language', 'ru')->first();
+        
+        $mainInfoEn->firstName = $input['firstNameEn'];
+        $mainInfoEn->lastName = $input['lastNameEn'];
+        $mainInfoEn->profession = $input['professionEn'];
+        
+        $mainInfoRu->firstName = $input['firstNameRu'];
+        $mainInfoRu->lastName = $input['lastNameRu'];
+        $mainInfoRu->profession = $input['professionRu'];
+        
+        $mainInfoEn->save();
+        $mainInfoRu->save();
     }
 }
