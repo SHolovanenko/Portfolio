@@ -3,7 +3,8 @@
 @section('content')
 
 <!-- Form::open(array('action' => array('Controller@method', $user->id))) -->
-{!! Form::open(array('action' => 'PortfolioAdminController@update')) !!}
+{!! Form::open(array('action' => 'PortfolioAdminController@update', 'enctype' => 'multipart/form-data')) !!}
+<div><a class="button" href="{{ url('/logout') }}">Logout</a></div>
 <div id="form">
     <div class="formSection" id="mainInfo">
 
@@ -73,6 +74,9 @@
         <div class="commonInfo">
 
             <input type="file" name="resumeFile">
+            @if(isset($files))
+            <a download href="{{ asset('files/'.$files[0]['title']) }}">{{ $files[0]['title'] }}</a>
+            @endif
         </div>
         
         <div class="rowGroup" id="resumeLineToClone">
@@ -234,6 +238,7 @@
 
                         <input type="text" name="portfolioLink[]" placeholder="Link" value="{{ $project['link'] }}">
                         <input type="file" name="portfolioImage[]">
+                        <img src="{{ asset('img/'.$project['img']) }}" height="50">
                     </div>
 
                     <div class="languageGroup">
@@ -338,6 +343,7 @@
                             <input type="hidden" name="socialNetworkId[]" value="{{ $socialNetwork['id'] }}">
                             <input type="text" name="socialNetworkLink[]" placeholder="Social network link" value="{{ $socialNetwork['link'] }}">
                             <input type="file" name="socialNetworkImage[]">
+                            <img src="{{ asset('img/'.$socialNetwork['icon']) }}" height="50">
                         </div>
                         <a class="button remove" onclick="removeLine()">X</a>
                     </div>

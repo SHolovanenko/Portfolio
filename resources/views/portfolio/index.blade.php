@@ -105,7 +105,7 @@
                 @endforeach     
                 
                 <div id="downloadResume">
-                    <a href="#">{{ $commonInfos[5]['value'] }}</a>
+                    <a download href="{{ asset('files/'.$files[0]['title']) }}">{{ $commonInfos[5]['value'] }}</a>
                 </div>
                 
                 <div>&nbsp;</div>
@@ -172,12 +172,12 @@
             
             <div class="title">{{ $commonInfos[3]['value'] }}</div>
             
-            <div class="subtitle">{{ $commonInfos[8]['value'] }} <a class="showMoreLink" href="#">{{ $commonInfos[9]['value'] }}</a></div>
+            <div class="subtitle">{{ $commonInfos[8]['value'] }} <a class="showMoreLink" href="{{ url($language . '/projects') }}">{{ $commonInfos[9]['value'] }}</a></div>
             
             <div id="portfolioContent">
                 @foreach ($portfolio as $project)
-                <div>
-                    <p>
+                <div class="portfolioImage" style="background: url({{ asset('img/'.$project['img']) }})">
+                    <div class="portfolioProjectInfo">
                         {{ $project['link'] }}
                         <br>
                         {{ $project['img'] }}
@@ -185,7 +185,7 @@
                         {{ $project['title'] }}
                         <br>
                         {{ $project['text'] }}
-                    </p>
+                    </div>
                 </div>
                 @endforeach
             </div>
@@ -229,6 +229,13 @@
                         <input type="submit" value="{{ $commonInfos[15]['value'] }}">
                     </form>
                 </div>
+            </div>
+            <div id="socialNetworks">
+                @foreach($socialNetworks as $network)
+                <a href="{{ $network['link'] }}">
+                    <img src="{{ asset('img/'.$network['icon']) }}" width="30" height="30">
+                </a>
+                @endforeach
             </div>
         </div>
         

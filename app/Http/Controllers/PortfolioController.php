@@ -13,6 +13,7 @@ use App\Phone;
 use App\Mail;
 use App\SocialNetwork;
 use App\CommonInfo;
+use App\File;
 
 class PortfolioController extends Controller
 {
@@ -29,7 +30,9 @@ class PortfolioController extends Controller
             $mails =    Mail::select('mail')->get();
             $socialNetworks = SocialNetwork::select('link', 'icon')->get();
             $commonInfos = CommonInfo::select('section', 'title', 'value_ru as value')->get();
-            return view('portfolio.index', compact('mainInfo', 'skills', 'resumes', 'stories', 'portfolio','phones','mails','socialNetworks','commonInfos'));
+            $files = File::select('title')->get();
+            $language = 'ru';
+            return view('portfolio.index', compact('language','mainInfo', 'skills', 'resumes', 'stories', 'portfolio','phones','mails','socialNetworks','commonInfos','files'));
         }
         elseif (strnatcasecmp($language, 'en') == 0){
             $mainInfo = MainInfo::where('language', 'en')->first();
@@ -41,7 +44,9 @@ class PortfolioController extends Controller
             $mails =    Mail::select('mail')->get();
             $socialNetworks = SocialNetwork::select('link', 'icon')->get();
             $commonInfos = CommonInfo::select('section', 'title', 'value_en as value')->get();
-            return view('portfolio.index', compact('mainInfo', 'skills', 'resumes', 'stories', 'portfolio','phones','mails','socialNetworks','commonInfos'));
+            $files = File::select('title')->get();
+            $language = 'en';
+            return view('portfolio.index', compact('language','mainInfo', 'skills', 'resumes', 'stories', 'portfolio','phones','mails','socialNetworks','commonInfos','files'));
         }
         
         return redirect('/en');

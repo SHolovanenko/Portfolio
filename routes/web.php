@@ -20,11 +20,15 @@ Route::get('/', function () {
 /*
  * Ссылаемся на портфолио как на основную страницу нашего сайта
  */
-Route::get('/administrator', 'PortfolioAdminController@index');
-Route::post('/administrator', 'PortfolioAdminController@update');
+Route::get('/administrator', 'PortfolioAdminController@index')->middleware('auth');
+Route::post('/administrator', 'PortfolioAdminController@update')->middleware('auth');;
 Route::get('/', 'PortfolioController@index');
-Route::get('/{language}', 'PortfolioController@index');
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/{language}', 'PortfolioController@index');
+Route::get('/{language}/projects', 'ProjectsController@index');
+
+

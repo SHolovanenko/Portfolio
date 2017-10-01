@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request as IlumRequest;
 use Request;
 
 use App\MainInfo;
@@ -13,67 +13,106 @@ use App\Portfolio;
 use App\Phone;
 use App\Mail;
 use App\SocialNetwork;
-use App\CommonInfo;
+use App\File;
+
+use Auth;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class PortfolioAdminController extends Controller
 {
-    public function auth(){
-        //
-        $is_auth = true;
-        
-        if ($is_auth) {
-            
-            $this->index();
-        }
-        else{
-            
-            return view('portfolio.administrator.auth');
-        }
-    }
-    
-    
-    
     public function index(){
         //
-        $mainInfo = MainInfo::all();
-        $skills =   Skill::all();
-        $resumes =  Resume::all();
-        $stories =  Story::all();
-        $portfolio = Portfolio::all();
-        $phones =   Phone::all();
-        $mails =    Mail::all();
-        $socialNetworks = SocialNetwork::all();
+        if ( Auth::user()->id == 1) {
+            //
+            $mainInfo = MainInfo::all();
+            $skills =   Skill::all();
+            $resumes =  Resume::all();
+            $stories =  Story::all();
+            $portfolio = Portfolio::all();
+            $phones =   Phone::all();
+            $mails =    Mail::all();
+            $socialNetworks = SocialNetwork::all();
+            $files = File::all();
+
+            return view('portfolio.administrator.index', compact('mainInfo', 'skills', 'resumes', 'stories', 'portfolio','phones','mails','socialNetworks','files'));
+        }
         
-        return view('portfolio.administrator.index', compact('mainInfo', 'skills', 'resumes', 'stories', 'portfolio','phones','mails','socialNetworks'));
+        return 'You don\'t have permission to access this page!';
     }
     
     
     
-    public function update(){
+    public function update(IlumRequest $ilum_input){
         //
         $input = Request::all();
         
+        $files = $ilum_input->file();
+        //dd($files['resumeFile']);
+        
         $this->update_main_info( $input );
         $this->update_skill( $input );
-        $this->update_resume( $input );
+        $this->update_resume( $input, $files );
         $this->update_story( $input );
-        $this->update_portfolio( $input );
+        $this->update_portfolio( $input, $files );
         $this->update_phone( $input );
         $this->update_mail( $input );
-        $this->update_social_network( $input );
+        $this->update_social_network( $input, $files );
         
         return redirect('administrator');
     }
     
     
     
-    public function upload_file( $file ){
+    /*public function upload_file( $file, $section, $connected_id ){
         //
-        $file->move(storage_path('portfolio'),$file->getClientOriginalName());
-        return storage_path('portfolio') . getClientOriginalName();
+        if($file){
+            $title = $file->getClientOriginalName();
+            $path = storage_path('uploaded_files');
+
+            $is_exist_file = File::select('id','path','title')->where([
+                    ['connected_id', $connected_id],
+                    ['section', $section]                    
+                ])->first();
+            
+            if (isset($is_exist_file->id)){
+                //update
+                $file_to_db = File::find($is_exist_file->id);
+                $file_to_db->path = $path;
+                $file_to_db->title = $title;
+                $file_to_db->save();
+
+                unlink($path . '\\' . $is_exist_file->title);
+            } 
+            else {
+                //insert
+                $file_to_db = new File;
+                $file_to_db->path = $path;
+                $file_to_db->title = $title;
+                $file_to_db->section = $section;
+                $file_to_db->connected_id = $connected_id;
+                $file_to_db->save();
+            }
+
+            $file->move($path, $title);
+            
+            return $path . '\\' . $title;
+        }
+        return null;
+    }*/
+    
+    public function upload_file($file){
+        //
+        $title = $file->getClientOriginalName();
+        $path = public_path('img');
+        $file->move($path, $title);
+        return $title;
+    }
+    
+    public function delete_file($title){
+        //
+        unlink(public_path('img') . '\\' . $title);
     }
     
     public function update_phone( $input ) {
@@ -146,14 +185,16 @@ class PortfolioAdminController extends Controller
         }
     }
 
-    public function update_social_network ( $input ) {
+    public function update_social_network ( $input, $files ) {
         //
         if (isset($input['socialNetworkTrashList']) && $input['socialNetworkTrashList'] != ''){
             //Delete
             $ids = explode(',', $input['socialNetworkTrashList']);
             foreach ($ids as $id){
                 if ($id != ''){
-                    SocialNetwork::find( $id )->delete();
+                    $socialNetwork = SocialNetwork::find( $id );
+                    $this->delete_file($socialNetwork->icon);
+                    $socialNetwork->delete();
                 }
             }
         }
@@ -164,17 +205,20 @@ class PortfolioAdminController extends Controller
                     //Update
                     $socialNetwork = SocialNetwork::find($id);
                     $socialNetwork->link = $input['socialNetworkLink'][$key];
-                    $socialNetwork->icon = '/';
+                    if (isset($files['socialNetworkImage'][$key])){
+                        $this->delete_file($socialNetwork->icon);
+                        $socialNetwork->icon = $this->upload_file($files['socialNetworkImage'][$key]);
+                    }
                     $socialNetwork->updated_at = Carbon::now()->format('Y-m-d H:i:s');
                     $socialNetwork->save();
                 }
             }
             else {
-                if ( isset($input['socialNetworkLink'][$key]) && $input['socialNetworkLink'][$key] != '' ){
+                if ( isset($input['socialNetworkLink'][$key],$files['socialNetworkImage'][$key]) && $input['socialNetworkLink'][$key] != '' ){
                     //Insert
                     $socialNetwork = new SocialNetwork;
                     $socialNetwork->link = $input['socialNetworkLink'][$key];
-                    $socialNetwork->icon = '/';
+                    $socialNetwork->icon = $this->upload_file($files['socialNetworkImage'][$key]);
                     $socialNetwork->created_at = Carbon::now()->format('Y-m-d H:i:s');
                     $socialNetwork->updated_at = Carbon::now()->format('Y-m-d H:i:s');
                     $socialNetwork->save();
@@ -182,16 +226,17 @@ class PortfolioAdminController extends Controller
             }
         }
     }
-    
 
-    public function update_portfolio( $input ){
+    public function update_portfolio( $input, $files ){
         //
         if (isset($input['portfolioTrashList']) && $input['portfolioTrashList'] != ''){
             //Delete
             $ids = explode(',', $input['portfolioTrashList']);
             foreach ($ids as $id){
                 if ($id != ''){
-                    Resume::find( $id )->delete();
+                    $project = Portfolio::find( $id );
+                    $this->delete_file($project->img);
+                    $project->delete();
                 }
             }
         }
@@ -200,7 +245,7 @@ class PortfolioAdminController extends Controller
             if (isset($id) && $id != ''){
                 if ( isset($input['portfolioTitleRu'][$key], $input['portfolioTextRu'][$key], 
                            $input['portfolioTitleEn'][$key], $input['portfolioTextEn'][$key],
-                           $input['portfolioLink'][$key]//, $input['portfolioImage'][$key],
+                           $input['portfolioLink'][$key]//, $input['portfolioImage'][$key]
                         ) 
                         && $input['portfolioTitleRu'][$key] != '' && $input['portfolioTextRu'][$key] != '' 
                         && $input['portfolioTitleEn'][$key] != '' && $input['portfolioTextEn'][$key] != ''
@@ -213,7 +258,10 @@ class PortfolioAdminController extends Controller
                     $project->title_en = $input['portfolioTitleEn'][$key];
                     $project->text_en = $input['portfolioTextEn'][$key];
                     $project->link = $input['portfolioLink'][$key];
-                    $project->img = '/';
+                    if (isset($files['portfolioImage'][$key])){
+                        $this->delete_file($project->img);
+                        $project->img = $this->upload_file($files['portfolioImage'][$key]);
+                    }
                     $project->updated_at = Carbon::now()->format('Y-m-d H:i:s');
                     $project->save();
                 }
@@ -234,7 +282,7 @@ class PortfolioAdminController extends Controller
                     $project->title_en = $input['portfolioTitleEn'][$key];
                     $project->text_en = $input['portfolioTextEn'][$key];
                     $project->link = $input['portfolioLink'][$key];
-                    $project->img = '/';
+                    $project->img = $this->upload_file($files['portfolioImage'][$key]);
                     $project->created_at = Carbon::now()->format('Y-m-d H:i:s');
                     $project->updated_at = Carbon::now()->format('Y-m-d H:i:s');
                     $project->save();
@@ -302,7 +350,7 @@ class PortfolioAdminController extends Controller
         }
     }
     
-    public function update_resume( $input ){
+    public function update_resume( $input, $files ){
         //
         if (isset($input['resumeTrashList']) && $input['resumeTrashList'] != ''){
             //Delete
@@ -342,6 +390,37 @@ class PortfolioAdminController extends Controller
                     $resume->save();
                 }
             }
+        }
+        
+        if (isset($files['resumeFile'])){
+            $title = $files['resumeFile']->getClientOriginalName();
+            $path = public_path('files');
+
+            $is_exist_file = File::select('id','path','title')->where([
+                    ['connected_id', (-1)],
+                    ['section', 'resume']                    
+                ])->first();
+            
+            if (isset($is_exist_file->id)){
+                //update
+                $file_to_db = File::find($is_exist_file->id);
+                $file_to_db->path = $path;
+                $file_to_db->title = $title;
+                $file_to_db->save();
+
+                unlink($path . '\\' . $is_exist_file->title);
+            } 
+            else {
+                //insert
+                $file_to_db = new File;
+                $file_to_db->path = $path;
+                $file_to_db->title = $title;
+                $file_to_db->section = 'resume';
+                $file_to_db->connected_id = (-1);
+                $file_to_db->save();
+            }
+
+            $files['resumeFile']->move($path, $title);
         }
     }
     
