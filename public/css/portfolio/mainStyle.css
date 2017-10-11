@@ -362,6 +362,16 @@ a:active { text-decoration: none; }
     transition: 0.3s;
 }
 
+#portfolioLayer #portfolio #portfolioContent .portfolioImage .portfolioProjectInfo .portfolioProjectTitle{
+    padding: 5%;
+    font-size: 20pt;
+}
+
+#portfolioLayer #portfolio #portfolioContent .portfolioImage .portfolioProjectInfo .portfolioProjectText{
+    padding: 5%;
+    font-size: 12pt;
+}
+
 .showMoreLink:after{
     content: ' >';
 }

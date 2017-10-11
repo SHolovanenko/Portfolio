@@ -49,6 +49,6 @@ class PortfolioController extends Controller
             return view('portfolio.index', compact('language','mainInfo', 'skills', 'resumes', 'stories', 'portfolio','phones','mails','socialNetworks','commonInfos','files'));
         }
         
-        return redirect('/en');
+        return redirect('/ru');
     }
 }

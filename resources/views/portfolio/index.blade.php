@@ -176,17 +176,14 @@
             
             <div id="portfolioContent">
                 @foreach ($portfolio as $project)
-                <div class="portfolioImage" style="background: url({{ asset('img/'.$project['img']) }})">
-                    <div class="portfolioProjectInfo">
-                        {{ $project['link'] }}
-                        <br>
-                        {{ $project['img'] }}
-                        <br>
-                        {{ $project['title'] }}
-                        <br>
-                        {{ $project['text'] }}
+                <a class="portfolioLink" href="{{ $project['link'] }}">
+                    <div class="portfolioImage" style="background: url({{ asset('img/'.$project['img']) }}) no-repeat; background-size: cover;">
+                        <div class="portfolioProjectInfo">
+                            <div class="portfolioProjectTitle">{{ $project['title'] }}</div>
+                            <div class="portfolioProjectText">{{ $project['text'] }}</div>
+                        </div>
                     </div>
-                </div>
+                </a>
                 @endforeach
             </div>
         </div>
@@ -220,14 +217,14 @@
                 
                 <div id="form">
                     
-                    <form>
+                    {!! Form::open(array('action' => 'MessagesController@send_message', 'enctype' => 'multipart/form-data')) !!}
                         
-                        <input type="text" placeholder="{{ $commonInfos[13]['value'] }}">
-                        <input type="email" placeholder="Email">
-                        <input type="text" placeholder="{{ $commonInfos[14]['value'] }}">
-                        <textarea rows="10"></textarea>
+                        <input type="text" name="name" placeholder="{{ $commonInfos[13]['value'] }}">
+                        <input type="email" name="mail" placeholder="Email">
+                        <input type="text" name="subject" placeholder="{{ $commonInfos[14]['value'] }}">
+                        <textarea rows="10" name="text" ></textarea>
                         <input type="submit" value="{{ $commonInfos[15]['value'] }}">
-                    </form>
+                    {!! Form::close() !!}
                 </div>
             </div>
             <div id="socialNetworks">

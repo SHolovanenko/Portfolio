@@ -13,11 +13,11 @@ class ProjectsController extends Controller
         if (strnatcasecmp($language, 'ru') == 0){
             $portfolio = Portfolio::select('link', 'img', 'title_ru as title', 'text_ru as text')->latest()->limit(3)->get()->reverse();
             
-            return view('portfolio.projects', compact('mainInfo', 'skills', 'resumes', 'stories', 'portfolio','phones','mails','socialNetworks','commonInfos','files'));
+            return view('portfolio.projects', compact('portfolio','language'));
         }
         elseif (strnatcasecmp($language, 'en') == 0){
             $portfolio = Portfolio::select('link', 'img', 'title_en as title', 'text_en as text')->latest()->limit(3)->get()->reverse();
-            return view('portfolio.projects', compact('mainInfo', 'skills', 'resumes', 'stories', 'portfolio','phones','mails','socialNetworks','commonInfos','files'));
+            return view('portfolio.projects', compact('portfolio','language'));
         } 
     }
 }

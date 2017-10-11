@@ -14,11 +14,11 @@ use App\Phone;
 use App\Mail;
 use App\SocialNetwork;
 use App\File;
+use App\Message;
 
 use Auth;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
 
 class PortfolioAdminController extends Controller
 {
@@ -35,8 +35,9 @@ class PortfolioAdminController extends Controller
             $mails =    Mail::all();
             $socialNetworks = SocialNetwork::all();
             $files = File::all();
+            $colMessages = Message::all()->count();
 
-            return view('portfolio.administrator.index', compact('mainInfo', 'skills', 'resumes', 'stories', 'portfolio','phones','mails','socialNetworks','files'));
+            return view('portfolio.administrator.index', compact('mainInfo', 'skills', 'resumes', 'stories', 'portfolio','phones','mails','socialNetworks','files','colMessages'));
         }
         
         return 'You don\'t have permission to access this page!';
@@ -64,43 +65,6 @@ class PortfolioAdminController extends Controller
     }
     
     
-    
-    /*public function upload_file( $file, $section, $connected_id ){
-        //
-        if($file){
-            $title = $file->getClientOriginalName();
-            $path = storage_path('uploaded_files');
-
-            $is_exist_file = File::select('id','path','title')->where([
-                    ['connected_id', $connected_id],
-                    ['section', $section]                    
-                ])->first();
-            
-            if (isset($is_exist_file->id)){
-                //update
-                $file_to_db = File::find($is_exist_file->id);
-                $file_to_db->path = $path;
-                $file_to_db->title = $title;
-                $file_to_db->save();
-
-                unlink($path . '\\' . $is_exist_file->title);
-            } 
-            else {
-                //insert
-                $file_to_db = new File;
-                $file_to_db->path = $path;
-                $file_to_db->title = $title;
-                $file_to_db->section = $section;
-                $file_to_db->connected_id = $connected_id;
-                $file_to_db->save();
-            }
-
-            $file->move($path, $title);
-            
-            return $path . '\\' . $title;
-        }
-        return null;
-    }*/
     
     public function upload_file($file){
         //

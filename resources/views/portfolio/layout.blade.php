@@ -5,7 +5,7 @@
         
         <link href="{{ asset('css/portfolio/mainStyle.css') }}" rel="stylesheet">
         <link href="{{ asset('css/portfolio/animate.css') }}" rel="stylesheet" media="all">
-        @stack('project-style')
+        @stack('custom-page-style')
         
         <script src="{{ asset('js/portfolio/jquery-3.2.1.min.js') }}"></script>
         <script src="{{ asset('js/portfolio/jquery.spincrement.min.js') }}"></script>

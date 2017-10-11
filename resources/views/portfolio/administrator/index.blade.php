@@ -3,8 +3,11 @@
 @section('content')
 
 <!-- Form::open(array('action' => array('Controller@method', $user->id))) -->
+<div id="managesButtonLine">
+    <a class="button" href="{{ url('/logout') }}">Logout</a>
+    <a class="button" href="{{ url('/logout') }}">Messages: {{ $colMessages }}</a>
+</div>
 {!! Form::open(array('action' => 'PortfolioAdminController@update', 'enctype' => 'multipart/form-data')) !!}
-<div><a class="button" href="{{ url('/logout') }}">Logout</a></div>
 <div id="form">
     <div class="formSection" id="mainInfo">
 

@@ -4,9 +4,9 @@
 
 @section('content')
 <div id="all-projects">
-    <a class="project" href="{{ url('/') }}">
-        <div class="project-image" style="background: #8B0000">
-            <div class="project-info">
+    <a id="back" class="project" href="{{ url('/'.$language) }}">
+        <div class="project-image">
+            <div>
                 <div class="project-title">
                     &nbsp;
                 </div>
@@ -19,7 +19,7 @@
     
 @foreach($portfolio as $project)
     <a class="project" href="{{ $project['link'] }}">
-        <div class="project-image" style="background: url({{ asset('img/'.$project['img']) }}) no-repeat">
+        <div class="project-image" style="background: url({{ asset('img/'.$project['img']) }}) no-repeat; background-size: cover;">
             <div class="project-info">
                 <div class="project-title">
                     {{ $project['title'] }}
@@ -34,8 +34,25 @@
 </div>
 @endsection
 
-@push('project-style')
+@push('custom-page-style')
 <style>
+    #back{
+        border: none;
+    }
+    #back .project-image{
+        background: url({{ asset('img/back-nohover.png') }}) no-repeat; 
+        background-size: 80%;
+        background-position-x: center;
+        background-position-y: center;
+    }
+    #back .project-image:hover{
+        background: url({{ asset('img/back-hover.png') }}) no-repeat; 
+        background-size: 80%;
+        background-position-x: center;
+        background-position-y: center;
+        transition: 0.3s;
+    }
+    
     body{
         background: #808080;
     }
